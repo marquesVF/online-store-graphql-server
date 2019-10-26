@@ -9,7 +9,9 @@ class Mutations::SignInMutation < Mutations::BaseMutation
     def resolve(email:, password:)
         user = User.find_by(email: email)
 
-        return {} unless user.authenticate password
+        unless user.authenticate password
+            raise GraphQL::ExecutionError, 'Invalid e-mail or password'
+        end
 
         token = Digest::SHA2.new.hexdigest(Random.new.bytes 16)
         session = Session.create(token: token, user: user)
