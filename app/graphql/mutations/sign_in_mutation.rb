@@ -9,7 +9,7 @@ class Mutations::SignInMutation < Mutations::BaseMutation
     def resolve(email:, password:)
         user = User.find_by(email: email)
 
-        unless user.authenticate password
+        unless !user.nil? and user.authenticate password
             raise GraphQL::ExecutionError, 'Invalid e-mail or password'
         end
 
