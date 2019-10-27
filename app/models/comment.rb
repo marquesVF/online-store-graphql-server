@@ -1,7 +1,6 @@
-class Post < ApplicationRecord
+class Comment < ApplicationRecord
   belongs_to :user
-
-  has_many :comments
+  belongs_to :post
 
   def author
     user.name

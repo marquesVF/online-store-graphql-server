@@ -6,7 +6,7 @@ module Types
     field :posts, [Types::PostType], null: true, description: "List all posts"
 
     def posts
-      Post.all
+      Post.eager_load(:user, comments: [:user])
     end
 
     field :post, Types::PostType, null: false do
