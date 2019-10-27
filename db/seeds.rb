@@ -5,8 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
 
-user = User.create first_name: 'John', last_name: 'Mark', email: 'john@mail.com', password: '1'
-
-Post.create title: 'Look at this!', content: 'Have you ever danced?', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', user_id: user.id
-
+20.times do
+    u = User.new(
+        name: Faker::Name.name,
+        email: Faker::Internet.email,
+        password: "1"
+    )
+    u.save
+    10.times do
+        Post.create(
+            user: u,
+            title: Faker::Book.title,
+            content: Faker::Lorem.paragraph,
+            url: Faker::Internet.url
+        )
+    end
+end
