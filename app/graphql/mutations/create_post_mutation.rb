@@ -1,4 +1,4 @@
-class Mutations::AddPostMutation < Mutations::BaseMutation
+class Mutations::CreatePostMutation < Mutations::BaseMutation
     argument :title, String, required: true
     argument :content, String, required: true
     argument :url, String, required: false

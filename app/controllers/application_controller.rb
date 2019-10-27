@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
     def current_user
         token = request.headers["Authorization"].to_s
+        return if token.blank?
+
         session = Session.find_by token: token
 
         session ? session.user : nil
