@@ -10,35 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_205626) do
+ActiveRecord::Schema.define(version: 2019_11_23_191757) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_table "carts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "carts_products", id: false, force: :cascade do |t|
+    t.integer "cart_id", null: false
+    t.integer "product_id", null: false
+    t.index ["cart_id", "product_id"], name: "index_carts_products_on_cart_id_and_product_id"
+    t.index ["product_id", "cart_id"], name: "index_carts_products_on_product_id_and_cart_id"
+  end
 
   create_table "comments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["product_id"], name: "index_comments_on_product_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.string "url"
-    t.bigint "user_id", null: false
+  create_table "product_categories", force: :cascade do |t|
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.text "name"
+    t.text "description"
+    t.float "price"
+    t.integer "product_category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_category_id"], name: "index_products_on_product_category_id"
   end
 
   create_table "sessions", force: :cascade do |t|
     t.text "token", null: false
     t.boolean "active", default: true, null: false
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
@@ -52,8 +69,9 @@ ActiveRecord::Schema.define(version: 2019_10_27_205626) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "comments", "posts"
+  add_foreign_key "carts", "users"
+  add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
-  add_foreign_key "posts", "users"
+  add_foreign_key "products", "product_categories"
   add_foreign_key "sessions", "users"
 end
