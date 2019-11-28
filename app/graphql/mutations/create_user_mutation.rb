@@ -10,6 +10,7 @@ class Mutations::CreateUserMutation < Mutations::BaseMutation
             email: email,
             name: name,
             password: password,
+            cart: Cart.create
         )
 
         if user.save

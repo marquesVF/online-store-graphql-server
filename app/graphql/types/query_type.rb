@@ -6,6 +6,10 @@ module Types
 
     field :current_user,
       resolver: Resolvers::UserResolver,
-      description: 'Get current user by its token'
+      description: 'Get user by its token'
+
+    field :cart,
+      resolver: Resolvers::CartResolver,
+      description: 'Get cart by signed user'
   end
 end
