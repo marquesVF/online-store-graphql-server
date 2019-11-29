@@ -4,8 +4,14 @@ class Resolvers::ProductResolver < Resolvers::BaseResolver
     argument :id, ID, required: false
 
     def resolve(id: nil)
-        return [Product.find(id)] if id
+        return [products.find(id)] if id
 
-        Product.all
+        products.all
+    end
+
+    private
+
+    def products
+        Product.eager_load(:product_category)
     end
 end
