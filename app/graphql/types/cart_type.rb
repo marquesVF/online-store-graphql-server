@@ -3,4 +3,5 @@ class Types::CartType < Types::BaseObject
 
     field :id, ID, null: false
     field :products, [Types::ProductType], null: true
+    field :total, Float, null: false
 end

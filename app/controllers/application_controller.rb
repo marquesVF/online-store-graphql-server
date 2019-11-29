@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
         token = request.headers["Authorization"].to_s
         return if token.blank?
 
-        session = Session.find_by token: token
+        session = Session.eager_load(:user).find_by token: token
 
         session ? session.user : nil
     end
