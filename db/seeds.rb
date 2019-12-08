@@ -1,18 +1,33 @@
 require 'faker'
 
-10.times do
-    user = User.create(
+user_ids = rand(1..30).times.map do
+    User.create(
         name: Faker::Name.name,
         email: Faker::Internet.email,
         password: "1"
     )
-    10.times do
-        post = Post.create(
-            user: user,
-            title: Faker::Book.title,
-            content: Faker::Lorem.paragraph,
-            url: Faker::Internet.url
-        )
-        Comment.create(post: post, content: Faker::Lorem.paragraph, user: user)
-    end
+end
+
+product_category_ids = 10.times.map do
+    ProductCategory.create(
+        description: Faker::Book.genre
+    )
+end
+
+product_ids = rand(1..100).times.map do
+    Product.create(
+        name: Faker::Book.title,
+        description: Faker::Lorem.sentence,
+        price: rand(10..240),
+        picture: Faker::LoremPixel.image,
+        product_category: product_category_ids.sample
+    )
+end
+
+100.times do
+    Comment.create(
+        user: user_ids.sample,
+        product: product_ids.sample,
+        content: Faker::Lorem.paragraph
+    )
 end
