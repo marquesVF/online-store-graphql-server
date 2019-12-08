@@ -19,6 +19,7 @@ product_ids = rand(1..100).times.map do
         name: Faker::Book.title,
         description: Faker::Lorem.sentence,
         price: rand(10..240),
+        picture: Faker::LoremPixel.image,
         product_category: product_category_ids.sample
     )
 end

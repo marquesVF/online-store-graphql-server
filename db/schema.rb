@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_29_032617) do
+ActiveRecord::Schema.define(version: 2019_12_02_011223) do
 
   create_table "cart_items", force: :cascade do |t|
     t.float "quantity"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_032617) do
     t.integer "product_category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "picture"
     t.index ["product_category_id"], name: "index_products_on_product_category_id"
   end
 

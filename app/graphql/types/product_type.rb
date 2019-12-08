@@ -6,4 +6,5 @@ class Types::ProductType < Types::BaseObject
     field :description, String, null: false
     field :price, Float, null: false
     field :category, String, null: false
+    field :picture, String, null: false
 end
