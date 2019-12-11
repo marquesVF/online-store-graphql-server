@@ -37,6 +37,9 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'faker'
   gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'byebug'
 end
 
 group :test do
