@@ -1,7 +1,9 @@
-class Resolvers::UserResolver < Resolvers::BaseResolver
-    type Types::UserType, null: false
+# frozen_string_literal: true
 
-    def resolve
-        context[:current_user]
-    end
+class Resolvers::UserResolver < Resolvers::BaseResolver
+  type Types::UserType, null: false
+
+  def resolve
+    context[:current_user]
+  end
 end
