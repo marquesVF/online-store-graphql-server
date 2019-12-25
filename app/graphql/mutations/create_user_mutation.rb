@@ -9,17 +9,11 @@ module Mutations
     field :user, Types::UserType, null: true
 
     def resolve(email:, name:, password:)
-      user = new_user email, name, password
+      user = User.new(email: email, name: name, password: password)
 
       raise GraphQL::ExecutionError, post.errors.full_message unless user.save
 
       { user: user }
     end
-  end
-
-  private
-
-  def new_user(email, name, password)
-    User.new(email: email, name: name, password: password, cart: Cart.create)
   end
 end

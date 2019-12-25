@@ -33,3 +33,6 @@ yarn-debug.log*
 # Ignore sqlite databases
 db/development.sqlite3
 db/test.sqlite3
+
+# Ignore coverage output
+coverage/*

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  module Car
+  module Cart
     class RemoveProductFromCartMutation < Mutations::BaseMutation
       argument :products, [String], required: true
 
