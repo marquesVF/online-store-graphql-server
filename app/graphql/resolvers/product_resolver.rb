@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 class Resolvers::ProductResolver < Resolvers::BaseResolver
-    type [Types::ProductType], null: false
+  type [Types::ProductType], null: false
 
-    argument :id, ID, required: false
+  argument :id, ID, required: false
 
-    def resolve(id: nil)
-        return [products.find(id)] if id
+  def resolve(id: nil)
+    return [products.find(id)] if id
 
-        products.all
-    end
+    products.all
+  end
 
-    private
+  private
 
-    def products
-        Product.eager_load(:product_category)
-    end
+  def products
+    Product.eager_load(:product_category)
+  end
 end

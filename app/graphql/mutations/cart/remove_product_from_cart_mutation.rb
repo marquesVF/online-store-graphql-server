@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class Mutations::Cart::RemoveProductFromCartMutation < Mutations::BaseMutation
-    argument :products, [String], required: true
+  argument :products, [String], required: true
 
-    field :cart, Types::CartType, null: false
+  field :cart, Types::CartType, null: false
 
-    def resolve(products:)
-        cart = context[:current_user].cart
-        cart.products.delete(Product.find(products))
-        cart.save
+  def resolve(products:)
+    cart = context[:current_user].cart
+    cart.products.delete(Product.find(products))
+    cart.save
 
-        { cart: cart }
-    end
+    { cart: cart }
+  end
 end
