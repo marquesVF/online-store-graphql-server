@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class Resolvers::BaseResolver < GraphQL::Schema::Resolver
+module Resolvers
+  class BaseResolver < GraphQL::Schema::Resolver
+  end
 end
