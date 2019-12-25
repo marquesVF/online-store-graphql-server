@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
+
 require 'rails_helper'
 
 describe 'User', type: :mutation do
-
   include GraphqlHelper
 
   describe 'createUser' do
@@ -28,7 +29,7 @@ describe 'User', type: :mutation do
       GQL
     end
     let(:user) do
-      OpenStruct.new (gql_response.data['createUser']['user'])
+      OpenStruct.new gql_response.data['createUser']['user']
     end
 
     before do
@@ -51,3 +52,5 @@ describe 'User', type: :mutation do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength
